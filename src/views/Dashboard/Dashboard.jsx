@@ -14,11 +14,9 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItem';
 import SimpleLineChart from './SimpleLineChart';
 import SimpleTable from './SimpleTable';
 import { MainContent } from '../MainContent';
-import { Link } from 'react-router-dom';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -116,57 +114,6 @@ class Dashboard extends React.Component {
 
         return (
             <div className={classes.root}>
-                <CssBaseline />
-                <AppBar
-                    position="absolute"
-                    className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
-                >
-                    <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
-                        <IconButton
-                            color="inherit"
-                            aria-label="Open drawer"
-                            onClick={this.handleDrawerOpen}
-                            className={classNames(
-                                classes.menuButton,
-                                this.state.open && classes.menuButtonHidden,
-                            )}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography
-                            component="h1"
-                            variant="h6"
-                            color="inherit"
-                            noWrap
-                            className={classes.title}
-                        >
-                            Dashboard
-            </Typography>
-                        <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
-                <Drawer
-                    variant="permanent"
-                    classes={{
-                        paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-                    }}
-                    open={this.state.open}
-                >
-                    <div className={classes.toolbarIcon}>
-                        <IconButton onClick={this.handleDrawerClose}>
-                            <ChevronLeftIcon />
-                        </IconButton>
-                    </div>
-                    <Divider />
-                    <List>{mainListItems}</List>
-                    <Divider />
-                    <List>{secondaryListItems}</List>
-                    <Link to="/app/sample">To Sample </Link>
-                </Drawer>
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
                     <Typography variant="h4" gutterBottom component="h2">

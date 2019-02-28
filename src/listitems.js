@@ -2,23 +2,33 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-
+import {Link} from 'react-router-dom';
 export const mainListItems = (
     <div>
-        <ListItem button>
+        <Link to="/app/dashboard">
+            <ListItem button>
+                <ListItemIcon>
+                    <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+            </ListItem>
+        </Link>
+
+        <Link to="/app/boards">
+              <ListItem button>
             <ListItemIcon>
-                <DashboardIcon />
+                <BarChartIcon />
             </ListItemIcon>
-            <ListItemText primary="Dashboard" />
+            <ListItemText primary="Milestones" />
         </ListItem>
-        <ListItem button>
+        </Link>
+
+        {/* <ListItem button>
             <ListItemIcon>
                 <ShoppingCartIcon />
             </ListItemIcon>
@@ -41,13 +51,13 @@ export const mainListItems = (
                 <LayersIcon />
             </ListItemIcon>
             <ListItemText primary="Integrations" />
-        </ListItem>
+        </ListItem> */}
     </div>
 );
 
 export const secondaryListItems = (
     <div>
-        <ListSubheader inset>Saved reports</ListSubheader>
+        {/* <ListSubheader inset>Saved reports</ListSubheader>
         <ListItem button>
             <ListItemIcon>
                 <AssignmentIcon />
@@ -65,6 +75,6 @@ export const secondaryListItems = (
                 <AssignmentIcon />
             </ListItemIcon>
             <ListItemText primary="Year-end sale" />
-        </ListItem>
+        </ListItem> */}
     </div>
 );

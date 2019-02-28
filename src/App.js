@@ -14,12 +14,9 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-
-
-
-
-import { Link } from 'react-router-dom';
 import { MainContent } from './views/MainContent';
+import { mainListItems ,secondaryListItems } from './listitems';
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -163,27 +160,12 @@ class Dashboard extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          {/* <List>{mainListItems}</List> */}
+          <List>{mainListItems}</List>
           <Divider />
-          {/* <List>{secondaryListItems}</List> */}
-          <Link to="/app/sample">To Sample </Link>
-          <Link to="/app/sample2">To Sample 2</Link>
+          <List>{secondaryListItems}</List>
+
         </Drawer>
         <main className={classes.content}>
-          {/* <div className={classes.appBarSpacer} />
-          <Typography variant="h4" gutterBottom component="h2">
-            Orders
-                    </Typography>
-          <Typography component="div" className={classes.chartContainer}>
-            <SimpleLineChart />
-          </Typography>
-          <Typography variant="h4" gutterBottom component="h2">
-            Products
-                    </Typography>
-          <div className={classes.tableContainer}>
-            <SimpleTable />
-          </div>
-           */}
           <MainContent />
         </main>
       </div>
