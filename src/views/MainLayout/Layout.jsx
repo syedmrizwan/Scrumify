@@ -14,11 +14,12 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItem';
-import SimpleLineChart from './SimpleLineChart';
-import SimpleTable from './SimpleTable';
-import { MainContent } from '../MainContent';
+import { mainListItems, secondaryListItems } from '../Dashboard/listItem';
+import SimpleLineChart from '../Dashboard/SimpleLineChart';
+import SimpleTable from '../Dashboard/SimpleTable';
 import { Link } from 'react-router-dom';
+import { MainContent } from '../MainContent';
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -98,7 +99,7 @@ const styles = theme => ({
     },
 });
 
-class Dashboard extends React.Component {
+class Layout extends React.Component {
     state = {
         open: true,
     };
@@ -140,7 +141,7 @@ class Dashboard extends React.Component {
                             noWrap
                             className={classes.title}
                         >
-                            Dashboard
+                            Layout
             </Typography>
                         <IconButton color="inherit">
                             <Badge badgeContent={4} color="secondary">
@@ -166,6 +167,7 @@ class Dashboard extends React.Component {
                     <Divider />
                     <List>{secondaryListItems}</List>
                     <Link to="/app/sample">To Sample </Link>
+                    <Link to="/app/sample2">To Sample 2</Link>
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
@@ -181,15 +183,15 @@ class Dashboard extends React.Component {
                     <div className={classes.tableContainer}>
                         <SimpleTable />
                     </div>
-                    {/* <MainContent /> */}
+                    <MainContent />
                 </main>
             </div>
         );
     }
 }
 
-Dashboard.propTypes = {
+Layout.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Dashboard);
+export default withStyles(styles)(Layout);
