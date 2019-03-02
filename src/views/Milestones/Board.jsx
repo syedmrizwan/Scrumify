@@ -4,19 +4,19 @@ import MainMileStoneBoard, { getItems } from './MainMileStoneBoard';
 
 let pipelines = [
     {
-        id: 1,
+        id: 0,
         name: "Line 1",
         cards: getItems(5),
     },
 
     {
-        id: 2,
+        id: 1,
         name: "Line 2",
         cards: getItems(3, 5),
     },
 
     {
-        id: 3,
+        id: 2,
         name: "Line 3",
         cards: getItems(6, 10),
     }

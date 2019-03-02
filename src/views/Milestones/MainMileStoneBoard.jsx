@@ -42,6 +42,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
+
     // some basic styles to make the items look a bit nicer
     userSelect: 'none',
     padding: grid * 2,
@@ -64,8 +65,8 @@ class MainMileStoneBoard extends Component {
 
 
     state = {
-        items: this.props.pipelines[0].cards,
-        selected: this.props.pipelines[1].cards,
+        selected0: this.props.pipelines[0].cards,
+        selected1: this.props.pipelines[1].cards,
         selected2: this.props.pipelines[2].cards,
     };
 
@@ -85,8 +86,8 @@ class MainMileStoneBoard extends Component {
      * source arrays stored in the state.
      */
     id2List = {
-        droppable0: 'items',
-        droppable1: 'selected',
+        droppable0: 'selected0',
+        droppable1: 'selected1',
         droppable2: 'selected2'
 
     };
@@ -97,13 +98,14 @@ class MainMileStoneBoard extends Component {
 
         console.log(result);
         const { source, destination } = result;
-
+        debugger;
         // dropped outside the list
         if (!destination) {
             return;
         }
 
         if (source.droppableId === destination.droppableId) {
+            console.log("IF")
             const items = reorder(
                 this.getList(source.droppableId),
                 source.index,
@@ -113,7 +115,7 @@ class MainMileStoneBoard extends Component {
             let state = { items };
 
             if (source.droppableId === 'droppable1') {
-                state = { selected: items };
+                state = { selected1: items };
             }
 
             if (source.droppableId === 'droppable2') {
@@ -121,6 +123,8 @@ class MainMileStoneBoard extends Component {
             }
             this.setState(state);
         } else {
+
+            console.log("ELSE")
             const result = move(
                 this.getList(source.droppableId),
                 this.getList(destination.droppableId),
@@ -128,13 +132,15 @@ class MainMileStoneBoard extends Component {
                 destination
             );
 
-            console.log(source)
-            console.log(destination)
-            console.log("ELSE")
+
+            // console.log(source.droppableId)
+            // console.log(destination.droppableId)
+
             console.log(result)
             this.setState({
-                items: result.droppable0,
-                selected: result.droppable1
+                selected0: result.droppable0,
+                selected1: result.droppable1,
+                selected2: result.droppable2
             });
         }
 
@@ -151,8 +157,10 @@ class MainMileStoneBoard extends Component {
                 <main className={classes.content}>
                     <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'flex-start' }}>
                         <DragDropContext onDragEnd={this.onDragEnd}>
+
                             {
                                 this.props.pipelines.map((item, index) => {
+                                    { console.log("droppable" + index) }
                                     return (
                                         <div>
                                             <Droppable droppableId={"droppable" + index}>
@@ -174,7 +182,8 @@ class MainMileStoneBoard extends Component {
                                                                         style={getItemStyle(
                                                                             snapshot.isDragging,
                                                                             provided.draggableProps.style
-                                                                        )}>
+                                                                        )}
+                                                                    >
                                                                         {/* <Grid item md={4}>
                                                                             <StoryCard
                                                                                 title={"HyperLedger Servers Up"}
