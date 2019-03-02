@@ -7,7 +7,7 @@ import { styles } from '../../styles';
 import PropTypes from 'prop-types';
 
 // fake data generator
-const getItems = (count, offset = 0) =>
+export const getItems = (count, offset = 0) =>
     Array.from({ length: count }, (v, k) => k).map(k => ({
         id: `item-${k + offset}`,
         content: `item ${k + offset}`
@@ -61,19 +61,31 @@ const getListStyle = isDraggingOver => ({
 });
 
 class MainMileStoneBoard extends Component {
+
+
     state = {
-        items: getItems(10),
-        selected: getItems(5, 10)
+        items: this.props.pipelines[0].cards,
+        selected: this.props.pipelines[1].cards
     };
+
+    // componentDidMount() {
+    //     let payload = {}
+    //     for (let i in this.props.pipelines) {
+    //         payload.items = this.props.pipelines[i].cards
+    //         this.setState(
+    //         )
+    //     }
+
+    // }
 
     /**
      * A semi-generic way to handle multiple lists. Matches
-     * the IDs of the droppable container to the names of the
+     * the IDs of the droppable0 container to the names of the
      * source arrays stored in the state.
      */
     id2List = {
-        droppable: 'items',
-        droppable2: 'selected'
+        droppable0: 'items',
+        droppable1: 'selected',
     };
 
     getList = id => this.state[this.id2List[id]];
@@ -95,7 +107,7 @@ class MainMileStoneBoard extends Component {
 
             let state = { items };
 
-            if (source.droppableId === 'droppable2') {
+            if (source.droppableId === 'droppable1') {
                 state = { selected: items };
             }
 
@@ -109,10 +121,12 @@ class MainMileStoneBoard extends Component {
             );
 
             this.setState({
-                items: result.droppable,
-                selected: result.droppable2
+                items: result.droppable0,
+                selected: result.droppable1
             });
         }
+
+        console.log(this.state);
     };
 
     // Normally you would want to split things out into separate components.
@@ -125,76 +139,86 @@ class MainMileStoneBoard extends Component {
                 <main className={classes.content}>
                     <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'flex-start' }}>
                         <DragDropContext onDragEnd={this.onDragEnd}>
-                            <Droppable droppableId="droppable">
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        style={getListStyle(snapshot.isDraggingOver)}>
-                                        <Typography variant="title" gutterBottom>Pipe Line 1</Typography>
-                                        {this.state.items.map((item, index) => (
-                                            <Draggable
-                                                key={item.id}
-                                                draggableId={item.id}
-                                                index={index}>
+                            {
+                                this.props.pipelines.map((item, index) => {
+                                    return (
+                                        <div>
+                                            {console.log("droppable" + index)}
+                                            <Droppable droppableId={"droppable" + index}>
                                                 {(provided, snapshot) => (
                                                     <div
                                                         ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style
-                                                        )}>
-                                                        {/* <Grid item md={4}>
-                                                            <StoryCard
-                                                                title={"HyperLedger Servers Up"}
-                                                                subHeader={"September 14, 2016"}
-                                                                mainDescription={"This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like."}
-                                                                avatar={"UA"}
-                                                                image={"https://fct.ca/wp-content/uploads/2017/07/FCT-Login-Page-Residential-Title-Insurance-1.jpg"}
-                                                            />
+                                                        style={getListStyle(snapshot.isDraggingOver)}>
+                                                        <Typography variant="title" gutterBottom>{item.name}</Typography>
+                                                        {item.cards.map((item, index) => (
+                                                            <Draggable
+                                                                key={item.id}
+                                                                draggableId={item.id}
+                                                                index={index}>
+                                                                {(provided, snapshot) => (
+                                                                    <div
+                                                                        ref={provided.innerRef}
+                                                                        {...provided.draggableProps}
+                                                                        {...provided.dragHandleProps}
+                                                                        style={getItemStyle(
+                                                                            snapshot.isDragging,
+                                                                            provided.draggableProps.style
+                                                                        )}>
+                                                                        {/* <Grid item md={4}>
+                                                                            <StoryCard
+                                                                                title={"HyperLedger Servers Up"}
+                                                                                subHeader={"September 14, 2016"}
+                                                                                mainDescription={"This impressive paella is a"}
+                                                                                avatar={"UA"}
+                                                                                image={"https://fct.ca/wp-content/uploads/2017/07/FCT-Login-Page-Residential-Title-Insurance-1.jpg"}
+                                                                            />
 
-                                                        </Grid> */}
-                                                        {item.content}
+                                                                        </Grid> */}
+                                                                        {item.content}
 
+                                                                    </div>
+                                                                )}
+                                                            </Draggable>
+                                                        ))}
+                                                        {provided.placeholder}
                                                     </div>
                                                 )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                            <Droppable droppableId="droppable2">
+                                            </Droppable>
+                                            {/* <Droppable droppableId="droppable1">
 
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        style={getListStyle(snapshot.isDraggingOver)}>
-                                        <Typography variant="title" gutterBottom>Pipe Line 2</Typography>
-                                        {this.state.selected.map((item, index) => (
-                                            <Draggable
-                                                key={item.id}
-                                                draggableId={item.id}
-                                                index={index}>
                                                 {(provided, snapshot) => (
                                                     <div
                                                         ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style
-                                                        )}>
-                                                        {item.content}
+                                                        style={getListStyle(snapshot.isDraggingOver)}>
+                                                        <Typography variant="title" gutterBottom>{item.name}</Typography>
+                                                        {this.state.selected.map((item, index) => (
+                                                            <Draggable
+                                                                key={item.id}
+                                                                draggableId={item.id}
+                                                                index={index}>
+                                                                {(provided, snapshot) => (
+                                                                    <div
+                                                                        ref={provided.innerRef}
+                                                                        {...provided.draggableProps}
+                                                                        {...provided.dragHandleProps}
+                                                                        style={getItemStyle(
+                                                                            snapshot.isDragging,
+                                                                            provided.draggableProps.style
+                                                                        )}>
+                                                                        {item.content}
+                                                                    </div>
+                                                                )}
+                                                            </Draggable>
+                                                        ))}
+                                                        {provided.placeholder}
                                                     </div>
                                                 )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
+                                            </Droppable> */}
+                                        </div>
+                                    )
+                                })
+                            }
+
                         </DragDropContext>
                     </div>
 

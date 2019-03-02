@@ -18,9 +18,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const styles = theme => ({
-    card: {
-        maxWidth: 400,
-    },
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
@@ -76,7 +73,7 @@ class StoryCard extends React.Component {
                 />
                 <CardContent>
                     <Typography component="p">
-                       {this.props.mainDescription}
+                        {this.props.mainDescription}
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
@@ -100,7 +97,7 @@ class StoryCard extends React.Component {
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                     <CardContent>
                         <Typography paragraph>More Details Here</Typography>
-                        
+
                         <Typography>
                             Set aside off of the heat to let rest for 10 minutes, and then serve.
                         </Typography>
