@@ -65,7 +65,8 @@ class MainMileStoneBoard extends Component {
 
     state = {
         items: this.props.pipelines[0].cards,
-        selected: this.props.pipelines[1].cards
+        selected: this.props.pipelines[1].cards,
+        selected2: this.props.pipelines[2].cards,
     };
 
     // componentDidMount() {
@@ -86,11 +87,15 @@ class MainMileStoneBoard extends Component {
     id2List = {
         droppable0: 'items',
         droppable1: 'selected',
+        droppable2: 'selected2'
+
     };
 
     getList = id => this.state[this.id2List[id]];
 
     onDragEnd = result => {
+
+        console.log(result);
         const { source, destination } = result;
 
         // dropped outside the list
@@ -111,6 +116,9 @@ class MainMileStoneBoard extends Component {
                 state = { selected: items };
             }
 
+            if (source.droppableId === 'droppable2') {
+                state = { selected2: items };
+            }
             this.setState(state);
         } else {
             const result = move(
@@ -120,6 +128,10 @@ class MainMileStoneBoard extends Component {
                 destination
             );
 
+            console.log(source)
+            console.log(destination)
+            console.log("ELSE")
+            console.log(result)
             this.setState({
                 items: result.droppable0,
                 selected: result.droppable1
@@ -143,7 +155,6 @@ class MainMileStoneBoard extends Component {
                                 this.props.pipelines.map((item, index) => {
                                     return (
                                         <div>
-                                            {console.log("droppable" + index)}
                                             <Droppable droppableId={"droppable" + index}>
                                                 {(provided, snapshot) => (
                                                     <div

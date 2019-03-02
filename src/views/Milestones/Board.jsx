@@ -15,11 +15,11 @@ let pipelines = [
         cards: getItems(3, 5),
     },
 
-    // {
-    //     id: 3,
-    //     name: "Line 3",
-    //     cards: getItems(6, 10),
-    // }
+    {
+        id: 3,
+        name: "Line 3",
+        cards: getItems(6, 10),
+    }
 ]
 
 class Board extends React.Component {
