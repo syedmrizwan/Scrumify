@@ -95,10 +95,10 @@ class MainMileStoneBoard extends Component {
     getList = id => this.state[this.id2List[id]];
 
     onDragEnd = result => {
-
+        console.log(this.state)
         console.log(result);
         const { source, destination } = result;
-        debugger;
+        //debugger;
         // dropped outside the list
         if (!destination) {
             return;
@@ -114,6 +114,10 @@ class MainMileStoneBoard extends Component {
 
             let state = { items };
 
+            if (source.droppableId === 'droppable0') {
+                state = { selected0: items };
+            }
+
             if (source.droppableId === 'droppable1') {
                 state = { selected1: items };
             }
@@ -123,7 +127,6 @@ class MainMileStoneBoard extends Component {
             }
             this.setState(state);
         } else {
-
             console.log("ELSE")
             const result = move(
                 this.getList(source.droppableId),
@@ -136,12 +139,32 @@ class MainMileStoneBoard extends Component {
             // console.log(source.droppableId)
             // console.log(destination.droppableId)
 
-            console.log(result)
-            this.setState({
-                selected0: result.droppable0,
-                selected1: result.droppable1,
-                selected2: result.droppable2
-            });
+            // console.log(result)
+            // console.log(result.droppable0)
+            // console.log(result.droppable1)
+            // console.log(result.droppable2)
+            if (result && result.droppable0) {
+                this.setState({
+                    selected0: result.droppable0
+                })
+            }
+
+            if (result && result.droppable1) {
+                this.setState({
+                    selected1: result.droppable1
+                })
+            }
+
+            if (result && result.droppable2) {
+                this.setState({
+                    selected2: result.droppable2
+                })
+            }
+            // this.setState({
+            //     selected0: result.droppable0,
+            //     selected1: result.droppable1,
+            //     selected2: result.droppable2
+            // });
         }
 
         console.log(this.state);
@@ -160,7 +183,7 @@ class MainMileStoneBoard extends Component {
 
                             {
                                 this.props.pipelines.map((item, index) => {
-                                    { console.log("droppable" + index) }
+                                    // { console.log("droppable" + index) }
                                     return (
                                         <div>
                                             <Droppable droppableId={"droppable" + index}>
