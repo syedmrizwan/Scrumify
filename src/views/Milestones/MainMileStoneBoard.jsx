@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Grid, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import StoryCard from '../StoryCard/StoryCard';
 import { styles } from '../../styles';
 import PropTypes from 'prop-types';
+import { update, initBoard } from '../../actions/board';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
+
 
 // fake data generator
 export const getItems = (count, offset = 0) =>
@@ -49,17 +54,37 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     margin: `0 0 ${grid}px 0`,
 
     // change background colour if dragging
-    background: isDragging ? 'lightgreen' : 'grey',
+    background: isDragging ? '#DCDCDC' : '#DCDCDC',
 
     // styles we need to apply on draggables
     ...draggableStyle
 });
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    padding: grid,
-    width: 250
+    background: isDraggingOver ? '#E6E6FA' : 'white',
+    padding: grid
 });
+
+
+let pipelines = [
+    {
+        id: 0,
+        name: "Line 1",
+        cards: getItems(5),
+    },
+
+    {
+        id: 1,
+        name: "Line 2",
+        cards: getItems(3, 5),
+    },
+
+    {
+        id: 2,
+        name: "Line 3",
+        cards: getItems(6, 10),
+    }
+]
 
 class MainMileStoneBoard extends Component {
 
@@ -70,15 +95,10 @@ class MainMileStoneBoard extends Component {
         selected2: this.props.pipelines[2].cards,
     };
 
-    // componentDidMount() {
-    //     let payload = {}
-    //     for (let i in this.props.pipelines) {
-    //         payload.items = this.props.pipelines[i].cards
-    //         this.setState(
-    //         )
-    //     }
+    componentDidMount() {
+        this.props.dispatch(initBoard(pipelines))
 
-    // }
+    }
 
     /**
      * A semi-generic way to handle multiple lists. Matches
@@ -160,6 +180,12 @@ class MainMileStoneBoard extends Component {
                     selected2: result.droppable2
                 })
             }
+
+            let newState = [
+                this.state.selected0, this.state.selected1, this.state.selected2
+            ]
+
+            this.props.dispatch(update(result, this.props.pipelines))
             // this.setState({
             //     selected0: result.droppable0,
             //     selected1: result.droppable1,
@@ -178,11 +204,12 @@ class MainMileStoneBoard extends Component {
         return (
             <div className={classes.root}>
                 <main className={classes.content}>
-                    <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'flex-start' }}>
+                    <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'flex-start', paddingRight: '2rem' }}>
+
                         <DragDropContext onDragEnd={this.onDragEnd}>
 
                             {
-                                this.props.pipelines.map((item, index) => {
+                                this.props.pipelines && this.props.pipelines.map((item, index) => {
                                     // { console.log("droppable" + index) }
                                     return (
                                         <div>
@@ -207,16 +234,16 @@ class MainMileStoneBoard extends Component {
                                                                             provided.draggableProps.style
                                                                         )}
                                                                     >
-                                                                        {/* <Grid item md={4}>
-                                                                            <StoryCard
-                                                                                title={"HyperLedger Servers Up"}
-                                                                                subHeader={"September 14, 2016"}
-                                                                                mainDescription={"This impressive paella is a"}
-                                                                                avatar={"UA"}
-                                                                                image={"https://fct.ca/wp-content/uploads/2017/07/FCT-Login-Page-Residential-Title-Insurance-1.jpg"}
-                                                                            />
 
-                                                                        </Grid> */}
+                                                                        <StoryCard
+                                                                            title={"HyperLedger Servers Up"}
+                                                                            subHeader={"September 14, 2016"}
+                                                                            mainDescription={"This impressive paella is a"}
+                                                                            avatar={"UA"}
+                                                                            image={"https://fct.ca/wp-content/uploads/2017/07/FCT-Login-Page-Residential-Title-Insurance-1.jpg"}
+                                                                        />
+
+
                                                                         {item.content}
 
                                                                     </div>
@@ -277,7 +304,17 @@ MainMileStoneBoard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MainMileStoneBoard);
+
+const mapStateToProps = state => {
+    return {
+        //pipelines: state.board.boardState,
+    };
+}
+
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(MainMileStoneBoard)));
+
+//export default withStyles(styles)(MainMileStoneBoard);
 
 
 
