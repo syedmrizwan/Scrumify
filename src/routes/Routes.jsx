@@ -10,9 +10,9 @@ import SignIn from '../views/SignIn/SignIn';
 function Routes({ ...props }) {
     return (
         <Switch>
-            <Route path="/app/dashboard" component={Dashboard} />
-            <Route path="/app/boards" component={Board} />
-            <Route path="/login" component={SignIn} />
+            <Route path="/app" exact component={Board} />
+            <Route path="/app/dashboard" exact component={Dashboard} />
+            {/* <Route path="/login" component={SignIn} /> */}
         </Switch>
     )
 }

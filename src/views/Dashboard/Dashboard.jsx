@@ -128,7 +128,6 @@ class Dashboard extends React.Component {
                     <div className={classes.tableContainer}>
                         <SimpleTable />
                     </div>
-                    {/* <MainContent /> */}
                 </main>
             </div>
         );

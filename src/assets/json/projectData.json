@@ -1,0 +1,54 @@
+{
+    "data": [
+        {
+            "projectName":"WeWork Office Space",
+            "projectId":1004,
+            "projectInfo": {
+                "status":false,
+                "phone":"1-936-258-9473",
+                "stage":"Post-Construction",
+                "type":"Industrial", 
+                "scheduleProgress":85
+            },
+            "siteInfo": {
+                "address":"5616 Major Blvd.",
+                "city":"Orlando",
+                "state":"FL", 
+                "zipCode":32819
+            }
+        },{
+            "projectName":"Hyatt Place",
+            "projectId":1005,
+            "projectInfo": {
+                "status":false,
+                "phone":"1-736-987-1234",
+                "stage":"Warranty",
+                "type":"Commercial", 
+                "scheduleProgress":100
+            },
+            "siteInfo": {
+                "address":"22570 San Juan Rd",
+                "city":"Sunnyvale",
+                "state":"CA", 
+                "zipCode":60110
+            }
+        },
+        {    
+            "projectName":"Mariott Hotel",
+            "projectId":1006,
+            "projectInfo": {
+                "status":false,
+                "phone":"1-672-887-6352",
+                "stage":"Closed",
+                "type":"Hospitality Institutional", 
+                "scheduleProgress":60
+            },
+            "siteInfo": {
+                "address":"4800 Town Center Parkway",
+                "city":"Sarasota",
+                "state":"FL", 
+                "zipCode":32246
+            }
+        }
+    ]
+}
