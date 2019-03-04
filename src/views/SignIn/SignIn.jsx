@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import withStyles from '@material-ui/core/styles/withStyles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-
+import { Typography, Grid } from '@material-ui/core';
+import image from '../../images/bg2.jpg';
 
 import SignInForm from './SignInForm';
 const styles = theme => ({
     main: {
+
         width: 'auto',
         display: 'block', // Fix IE 11 issue.
         marginLeft: theme.spacing.unit * 3,
@@ -30,7 +30,7 @@ const styles = theme => ({
     },
     avatar: {
         margin: theme.spacing.unit,
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.primary.main,
     },
     form: {
         width: '100%', // Fix IE 11 issue.
@@ -45,18 +45,26 @@ function SignIn(props) {
     const { classes } = props;
 
     return (
-        <main className={classes.main}>
-            <CssBaseline />
-            <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign in
-                </Typography>
-                <SignInForm />
-            </Paper>
-        </main>
+        <div style={{ background: 'url(' + image + ') center center no-repeat', backgroundSize: 'cover' }}>
+
+            <Grid style={{ justifyContent: 'center' }} container>
+                <Grid item sm={4}>
+                    <Paper className={classes.paper}>
+                        <Avatar className={classes.avatar}>
+                            <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
+                            LogIn
+                        </Typography>
+                        <SignInForm />
+                    </Paper>
+                </Grid>
+            </Grid>
+
+
+
+        </div>
+
     );
 }
 

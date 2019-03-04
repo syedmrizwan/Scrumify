@@ -181,9 +181,9 @@ class MainMileStoneBoard extends Component {
                 })
             }
 
-            let newState = [
-                this.state.selected0, this.state.selected1, this.state.selected2
-            ]
+            // let newState = [
+            //     this.state.selected0, this.state.selected1, this.state.selected2
+            // ]
 
             this.props.dispatch(update(result, this.props.pipelines))
             // this.setState({

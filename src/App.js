@@ -5,15 +5,8 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect, Provider as ReduxProvider } from 'react-redux';
-// import jwt from 'jsonwebtoken';
-// import { logout } from './actions/user';
-// import ForgotPassword from './views/ForgotPassword/ForgotPassword';
-// import ResetPassword from './views/ForgotPassword/ResetPassword';
-// import RejectInvite from './views/Invite/RejectInvite';
-// import AcceptProjectInvite from './views/Invite/AcceptProjectInvite';
 import SignIn from './views/SignIn/SignIn';
 import Layout from './views/MainLayout/Layout';
-import Board from './views/Milestones/Board';
 const theme = createMuiTheme(muiTheme);
 
 const ContextType = {
@@ -80,12 +73,6 @@ class App extends Component {
             <Route path="/" exact render={() => <Redirect to="/app" />} />
             <PrivateRoute props={this.props} isAuthenticated={true} path="/app" component={Layout} />
             <Route path="/login" exact component={SignIn} />
-            {/* <Route path="/login/:token" component={Login} />
-            <Route path="/forgotpassword" component={ForgotPassword} />
-            <Route path="/resetpassword/:resettoken" component={ResetPassword} />
-            <Route path="/invite/reject/:rejectToken" component={RejectInvite} /> */}
-            {/* <Route path="/accept/project-invite/:token" exact component={AcceptProjectInvite}/> */}
-
           </Switch>
         </MuiThemeProvider>
 
