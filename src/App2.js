@@ -14,10 +14,8 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import { MainContent } from './views/MainContent';
 import { mainListItems, secondaryListItems } from './listitems';
-import { MainContent } from './MainContent';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -98,7 +96,7 @@ const styles = theme => ({
     },
 });
 
-class Layout extends React.Component {
+class Dashboard extends React.Component {
     state = {
         open: true,
     };
@@ -140,7 +138,7 @@ class Layout extends React.Component {
                             noWrap
                             className={classes.title}
                         >
-                            Layout
+                            Dashboard
             </Typography>
                         <IconButton color="inherit">
                             <Badge badgeContent={4} color="secondary">
@@ -175,17 +173,8 @@ class Layout extends React.Component {
     }
 }
 
-Layout.propTypes = {
+Dashboard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-//export default withRouter(connect(mapStateToProps)(App));
-
-function mapStateToProps(store) {
-    return {
-        // isAuthenticated: store.auth.isAuthenticated,
-    };
-}
-
-export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(Layout)));
-//export default withStyles(styles)(Layout);
+export default withStyles(styles)(Dashboard);

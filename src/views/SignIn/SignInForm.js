@@ -2,7 +2,6 @@ import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import { outLinedTextField } from '../../components/ReduxForm/FormAttributes';
 import { Field, reduxForm } from 'redux-form'
@@ -82,7 +81,7 @@ class SignInForm extends React.Component {
                     color="primary"
                     className={classes.submit}
                 >
-                    Sign in
+                    Login
           </Button>
             </form>
         )

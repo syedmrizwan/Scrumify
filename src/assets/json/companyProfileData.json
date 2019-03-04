@@ -1,0 +1,26 @@
+{
+    "data": [
+        {
+            "registrationNumber":null,
+            "companyName":"Architectia",
+            "role":"Suppliers",
+            "rating":"90%",
+            "location":"FL",
+            "coreCompetencies":"Glass Work and Aluminium Raw Material Suppliers" 
+         },{
+            "registrationNumber":null,
+            "companyName":"Neighbourhood Creations",
+            "role":"Subcontractor",
+            "rating":"82%",
+            "location":"FL",
+            "coreCompetencies":"Plumbing Services"
+         },{
+            "registrationNumber":null,
+            "companyName":"Russel Contracting",
+            "role":"Architects",
+            "rating":"75%",
+            "location":"FL",
+            "coreCompetencies":"Designing State of the Art Buildings" 
+         }
+       ]
+}
