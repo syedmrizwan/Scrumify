@@ -90,13 +90,30 @@ class MainMileStoneBoard extends Component {
 
 
     state = {
-        selected0: this.props.pipelines[0].cards,
-        selected1: this.props.pipelines[1].cards,
-        selected2: this.props.pipelines[2].cards,
+        lists: {
+        },
+        id2List: {
+        }
     };
 
+
     componentDidMount() {
-        this.props.dispatch(initBoard(pipelines))
+        //this.props.dispatch(initBoard(pipelines))
+        for (let index in this.props.pipelines) {
+            let temp = this.state.lists;
+            temp["selected" + index] = this.props.pipelines[index].cards;
+            this.setState({
+                lists: temp
+            })
+
+            let listNames = this.state.id2List;
+            listNames["droppable" + index] = "selected" + index;
+            this.setState({
+                id2List: listNames
+            })
+        }
+
+        console.log(this.state)
 
     }
 
@@ -105,27 +122,22 @@ class MainMileStoneBoard extends Component {
      * the IDs of the droppable0 container to the names of the
      * source arrays stored in the state.
      */
-    id2List = {
-        droppable0: 'selected0',
-        droppable1: 'selected1',
-        droppable2: 'selected2'
+    // id2List = {
+    //     droppable0: 'selected0',
+    //     droppable1: 'selected1',
+    //     droppable2: 'selected2'
 
-    };
+    // };
 
-    getList = id => this.state[this.id2List[id]];
+    getList = id => this.state.lists[this.state.id2List[id]];
 
     onDragEnd = result => {
-        console.log(this.state)
-        console.log(result);
         const { source, destination } = result;
-        //debugger;
-        // dropped outside the list
         if (!destination) {
             return;
         }
 
         if (source.droppableId === destination.droppableId) {
-            console.log("IF")
             const items = reorder(
                 this.getList(source.droppableId),
                 source.index,
@@ -147,7 +159,6 @@ class MainMileStoneBoard extends Component {
             }
             this.setState(state);
         } else {
-            console.log("ELSE")
             const result = move(
                 this.getList(source.droppableId),
                 this.getList(destination.droppableId),
@@ -155,45 +166,18 @@ class MainMileStoneBoard extends Component {
                 destination
             );
 
-
-            // console.log(source.droppableId)
-            // console.log(destination.droppableId)
-
-            // console.log(result)
-            // console.log(result.droppable0)
-            // console.log(result.droppable1)
-            // console.log(result.droppable2)
-            if (result && result.droppable0) {
-                this.setState({
-                    selected0: result.droppable0
-                })
+            let temp = this.state.lists;
+            for (let i in Object.keys(temp)) {
+                if (result && result["droppable" + i]) {
+                    temp["selected" + i] = result["droppable" + i];
+                }
             }
 
-            if (result && result.droppable1) {
-                this.setState({
-                    selected1: result.droppable1
-                })
-            }
-
-            if (result && result.droppable2) {
-                this.setState({
-                    selected2: result.droppable2
-                })
-            }
-
-            // let newState = [
-            //     this.state.selected0, this.state.selected1, this.state.selected2
-            // ]
-
-            this.props.dispatch(update(result, this.props.pipelines))
-            // this.setState({
-            //     selected0: result.droppable0,
-            //     selected1: result.droppable1,
-            //     selected2: result.droppable2
-            // });
+            this.setState({
+                lists: temp
+            })
+            this.props.dispatch(update(temp, this.props.pipelines))
         }
-
-        console.log(this.state);
     };
 
     // Normally you would want to split things out into separate components.

@@ -26,19 +26,13 @@ export function updateBoardState(payload) {
     }
 }
 
-export function update(result, prevState) {
+export function update(state, prevState) {
     return (dispatch) => {
         let newState = prevState;
-        if (result && result.droppable0) {
-            newState[0].cards = result.droppable0
-        }
-
-        if (result && result.droppable1) {
-            newState[1].cards = result.droppable1
-        }
-
-        if (result && result.droppable2) {
-            newState[2].cards = result.droppable2
+        for (let i in Object.keys(state)) {
+            if (state && state["selected" + i]) {
+                newState[i].cards = state["selected" + i];
+            }
         }
         dispatch(updateBoardState(newState))
     }
