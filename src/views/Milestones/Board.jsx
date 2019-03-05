@@ -21,7 +21,7 @@ let pipelines = [
     {
         id: 2,
         name: "Line 3",
-        cards: getItems(4, 3),
+        cards: getItems(7, 10),
     }
 ]
 
