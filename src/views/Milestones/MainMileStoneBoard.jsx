@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 import { update } from '../../actions/board';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import DialogForm from '../../components/Dialogs/DialogForm';
+import PipleLineForm from './Pipeline/PipleLineForm';
 
 
 
@@ -91,13 +93,28 @@ const getListStyle = isDraggingOver => ({
 
 class MainMileStoneBoard extends Component {
 
+    constructor(props) {
+        super(props)
 
-    state = {
-        lists: {
-        },
-        id2List: {
-        }
-    };
+        this.state = {
+            lists: {},
+            id2List: {},
+            openDialog: false
+        };
+
+
+        this.openAddPipeLineDialog = this.openAddPipeLineDialog.bind(this);
+
+    }
+
+
+
+
+    openAddPipeLineDialog() {
+        this.setState({
+            openDialog: !this.state.openDialog
+        })
+    }
 
 
     componentDidMount() {
@@ -193,7 +210,7 @@ class MainMileStoneBoard extends Component {
 
                 <div className={classes.headerClass}>
                     <Typography variant="title">Milestones</Typography>
-                    <Button color="default" variant="contained">Add Pipeline</Button>
+                    <Button color="primary" variant="contained" onClick={this.openAddPipeLineDialog}>Add Pipeline</Button>
                 </div>
 
                 <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'flex-start', paddingRight: '1rem' }}>
@@ -283,6 +300,16 @@ class MainMileStoneBoard extends Component {
 
                     </DragDropContext>
                 </div>
+
+
+
+                <DialogForm
+                    maxWidth={"sm"}
+                    handleClose={this.openAddPipeLineDialog}
+                    title={"Add Pipe Line"}
+                    content={<PipleLineForm />}
+                    open={this.state.openDialog}
+                />
             </div>
         );
     }
