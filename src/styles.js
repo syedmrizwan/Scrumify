@@ -7,6 +7,10 @@ export const styles = theme => ({
     fullWidth: {
         width: '100%'
     },
+    headerClass: {
+        display: 'flex',
+        justifyContent: 'space-between'
+    },
     toolbar: {
         paddingRight: 24, // keep right padding when drawer closed
     },

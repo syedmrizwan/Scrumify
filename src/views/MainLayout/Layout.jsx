@@ -86,6 +86,7 @@ const styles = theme => ({
         padding: theme.spacing.unit * 3,
         height: '100vh',
         overflow: 'auto',
+        marginTop: '2rem'
     },
     chartContainer: {
         marginLeft: -22,
@@ -133,7 +134,7 @@ class Layout extends React.Component {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography
+                        {/* <Typography
                             component="h1"
                             variant="h6"
                             color="inherit"
@@ -141,7 +142,7 @@ class Layout extends React.Component {
                             className={classes.title}
                         >
                             Layout
-            </Typography>
+            </Typography> */}
                         <IconButton color="inherit">
                             <Badge badgeContent={4} color="secondary">
                                 <NotificationsIcon />

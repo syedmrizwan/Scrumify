@@ -8,21 +8,24 @@ import { initBoard } from '../../actions/board';
 let pipelines = [
     {
         id: 0,
-        name: "Line 1",
+        name: "SPRINT BACKLOG",
         cards: getItems(3),
     },
 
     {
         id: 1,
-        name: "Line 2",
+        name: "IN PROGRESS",
         cards: getItems(3, 5),
     },
 
     {
         id: 2,
-        name: "Line 3",
+        name: "CLOSED",
         cards: getItems(7, 10),
     }
+
+
+
 ]
 
 class Board extends React.Component {
