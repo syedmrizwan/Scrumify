@@ -77,12 +77,12 @@ class StoryCard extends React.Component {
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
-                    <IconButton aria-label="Add to favorites">
+                    {/* <IconButton aria-label="Add to favorites">
                         <FavoriteIcon />
                     </IconButton>
                     <IconButton aria-label="Share">
                         <ShareIcon />
-                    </IconButton>
+                    </IconButton> */}
                     <IconButton
                         className={classnames(classes.expand, {
                             [classes.expandOpen]: this.state.expanded,
@@ -96,10 +96,8 @@ class StoryCard extends React.Component {
                 </CardActions>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <Typography paragraph>More Details Here</Typography>
-
                         <Typography>
-                            Set aside off of the heat to let rest for 10 minutes, and then serve.
+                            Set aside off of the heat to
                         </Typography>
                     </CardContent>
                 </Collapse>

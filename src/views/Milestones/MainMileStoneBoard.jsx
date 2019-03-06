@@ -50,19 +50,19 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 
     // some basic styles to make the items look a bit nicer
     userSelect: 'none',
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
-
+    padding: grid * 1,
+    //margin: `0 0 ${grid}px 0`,
     // change background colour if dragging
-    background: isDragging ? '#DCDCDC' : '#DCDCDC',
+    background: isDragging ? '#9864FF' : '',
 
     // styles we need to apply on draggables
     ...draggableStyle
 });
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? '#E6E6FA' : 'white',
-    padding: grid
+    background: isDraggingOver ? '#E6E6FA' : '#E6E6FA',
+    padding: grid,
+    marginLeft: '0.2rem'
 });
 
 
@@ -188,7 +188,7 @@ class MainMileStoneBoard extends Component {
         return (
             <div className={classes.root}>
                 <main className={classes.content}>
-                    <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'flex-start', paddingRight: '2rem' }}>
+                    <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'flex-start', paddingRight: '1rem' }}>
 
                         <DragDropContext onDragEnd={this.onDragEnd}>
 
