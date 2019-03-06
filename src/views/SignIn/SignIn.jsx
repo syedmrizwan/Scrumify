@@ -45,7 +45,7 @@ function SignIn(props) {
     const { classes } = props;
 
     return (
-        <div style={{ background: 'url(' + image + ') center center no-repeat', backgroundSize: 'cover' }}>
+        <div style={{ height: '636px', background: 'url(' + image + ') center center no-repeat', backgroundSize: 'cover' }}>
 
             <Grid style={{ justifyContent: 'center' }} container>
                 <Grid item sm={4}>

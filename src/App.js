@@ -66,8 +66,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-
+      <div>
         <MuiThemeProvider theme={theme}>
           <Switch>
             <Route path="/" exact render={() => <Redirect to="/app" />} />
