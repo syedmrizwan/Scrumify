@@ -1,7 +1,5 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
 import { Field, reduxForm } from 'redux-form'
 import Button from '@material-ui/core/Button';

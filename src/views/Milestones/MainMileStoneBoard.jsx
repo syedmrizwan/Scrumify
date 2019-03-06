@@ -216,13 +216,11 @@ class MainMileStoneBoard extends Component {
 
         const { classes } = this.props;
         return (
-            <div style={{ marginTop: '2rem' }}>
-
+            <div style={{ marginTop: '4rem' }}>
                 <div className={classes.headerClass}>
                     <Typography variant="title">Milestones</Typography>
                     <Button color="primary" variant="contained" onClick={this.openAddPipeLineDialog}>Add Pipeline</Button>
                 </div>
-
                 <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'flex-start', paddingRight: '1rem' }}>
 
                     <DragDropContext onDragEnd={this.onDragEnd}>
