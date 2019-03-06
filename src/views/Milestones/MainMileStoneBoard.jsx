@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core';
 import StoryCard from '../StoryCard/StoryCard';
 import { styles } from '../../styles';
 import PropTypes from 'prop-types';
-import { update, initBoard } from '../../actions/board';
+import { update } from '../../actions/board';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -66,25 +66,25 @@ const getListStyle = isDraggingOver => ({
 });
 
 
-let pipelines = [
-    {
-        id: 0,
-        name: "Line 1",
-        cards: getItems(5),
-    },
+// let pipelines = [
+//     {
+//         id: 0,
+//         name: "Line 1",
+//         cards: getItems(5),
+//     },
 
-    {
-        id: 1,
-        name: "Line 2",
-        cards: getItems(3, 5),
-    },
+//     {
+//         id: 1,
+//         name: "Line 2",
+//         cards: getItems(3, 5),
+//     },
 
-    {
-        id: 2,
-        name: "Line 3",
-        cards: getItems(6, 10),
-    }
-]
+//     {
+//         id: 2,
+//         name: "Line 3",
+//         cards: getItems(6, 10),
+//     }
+// ]
 
 class MainMileStoneBoard extends Component {
 
