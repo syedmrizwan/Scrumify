@@ -1,8 +1,9 @@
-
+import red from '@material-ui/core/colors/red';
 const drawerWidth = 240
 export const styles = theme => ({
     root: {
         display: 'flex',
+        backgroundColor:'#FFFFFF'
     },
     fullWidth: {
         width: '100%'
@@ -86,5 +87,28 @@ export const styles = theme => ({
         padding: theme.spacing.unit * 2,
         textAlign: 'center',
         color: theme.palette.text.secondary,
+    },
+
+
+
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+    },
+    actions: {
+        display: 'flex',
+    },
+    expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+        }),
+    },
+    expandOpen: {
+        transform: 'rotate(180deg)',
+    },
+    avatar: {
+        backgroundColor: red[500],
     },
 });

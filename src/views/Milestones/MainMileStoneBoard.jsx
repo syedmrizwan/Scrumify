@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Typography, Button } from '@material-ui/core';
+import { Typography, Button, IconButton, Tooltip } from '@material-ui/core';
+import AddCircleOutlineOutlined from '@material-ui/icons/AddCircleOutlineOutlined';
 import StoryCard from '../StoryCard/StoryCard';
 import { styles } from '../../styles';
 import PropTypes from 'prop-types';
 import { update } from '../../actions/board';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import DialogForm from '../../components/Dialogs/DialogForm';
+import PipleLineForm from './Pipeline/PipleLineForm';
+import CardsForm from './Cards/CardsForm';
 
 
 
@@ -91,13 +95,36 @@ const getListStyle = isDraggingOver => ({
 
 class MainMileStoneBoard extends Component {
 
+    constructor(props) {
+        super(props)
 
-    state = {
-        lists: {
-        },
-        id2List: {
-        }
-    };
+        this.state = {
+            lists: {},
+            id2List: {},
+            openDialog: false,
+            openCardDialog: false,
+        };
+
+
+        this.openAddPipeLineDialog = this.openAddPipeLineDialog.bind(this);
+        this.openAddCardDialog = this.openAddCardDialog.bind(this);
+
+    }
+
+
+
+
+    openAddPipeLineDialog() {
+        this.setState({
+            openDialog: !this.state.openDialog
+        })
+    }
+
+    openAddCardDialog() {
+        this.setState({
+            openCardDialog: !this.state.openCardDialog
+        })
+    }
 
 
     componentDidMount() {
@@ -189,13 +216,11 @@ class MainMileStoneBoard extends Component {
 
         const { classes } = this.props;
         return (
-            <div style={{ marginTop: '2rem' }}>
-
+            <div style={{ marginTop: '4rem' }}>
                 <div className={classes.headerClass}>
                     <Typography variant="title">Milestones</Typography>
-                    <Button color="default" variant="contained">Add Pipeline</Button>
+                    <Button color="primary" variant="contained" onClick={this.openAddPipeLineDialog}>Add Pipeline</Button>
                 </div>
-
                 <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'flex-start', paddingRight: '1rem' }}>
 
                     <DragDropContext onDragEnd={this.onDragEnd}>
@@ -210,7 +235,19 @@ class MainMileStoneBoard extends Component {
                                                 <div
                                                     ref={provided.innerRef}
                                                     style={getListStyle(snapshot.isDraggingOver)}>
-                                                    <Typography variant="title" gutterBottom>{item.name}</Typography>
+                                                    <div className={classes.headerClass}>
+                                                        <Typography variant="body2" gutterBottom>{item.name}</Typography>
+
+
+
+                                                        <Tooltip title="Add cards in pipeline">
+                                                            <IconButton onClick={this.openAddCardDialog} className={classes.button} aria-label="Delete">
+                                                                <AddCircleOutlineOutlined />
+                                                            </IconButton>
+                                                        </Tooltip>
+
+                                                    </div>
+
                                                     {item.cards.map((item, index) => (
                                                         <Draggable
                                                             key={item.id}
@@ -246,36 +283,6 @@ class MainMileStoneBoard extends Component {
                                                 </div>
                                             )}
                                         </Droppable>
-                                        {/* <Droppable droppableId="droppable1">
-
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        style={getListStyle(snapshot.isDraggingOver)}>
-                                                        <Typography variant="title" gutterBottom>{item.name}</Typography>
-                                                        {this.state.selected.map((item, index) => (
-                                                            <Draggable
-                                                                key={item.id}
-                                                                draggableId={item.id}
-                                                                index={index}>
-                                                                {(provided, snapshot) => (
-                                                                    <div
-                                                                        ref={provided.innerRef}
-                                                                        {...provided.draggableProps}
-                                                                        {...provided.dragHandleProps}
-                                                                        style={getItemStyle(
-                                                                            snapshot.isDragging,
-                                                                            provided.draggableProps.style
-                                                                        )}>
-                                                                        {item.content}
-                                                                    </div>
-                                                                )}
-                                                            </Draggable>
-                                                        ))}
-                                                        {provided.placeholder}
-                                                    </div>
-                                                )}
-                                            </Droppable> */}
                                     </div>
                                 )
                             })
@@ -283,6 +290,25 @@ class MainMileStoneBoard extends Component {
 
                     </DragDropContext>
                 </div>
+
+
+
+                <DialogForm
+                    maxWidth={"sm"}
+                    handleClose={this.openAddPipeLineDialog}
+                    title={"Add Pipe Line"}
+                    content={<PipleLineForm />}
+                    open={this.state.openDialog}
+                />
+
+
+                <DialogForm
+                    maxWidth={"sm"}
+                    handleClose={this.openAddCardDialog}
+                    title={"Add Cards"}
+                    content={<CardsForm />}
+                    open={this.state.openCardDialog}
+                />
             </div>
         );
     }

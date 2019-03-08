@@ -8,6 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
@@ -18,90 +19,24 @@ import { mainListItems, secondaryListItems } from './listitems';
 import { MainContent } from './MainContent';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { styles } from '../../styles';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-const drawerWidth = 240;
 
-const styles = theme => ({
-    root: {
-        display: 'flex',
-    },
-    toolbar: {
-        paddingRight: 24, // keep right padding when drawer closed
-    },
-    toolbarIcon: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 8px',
-        ...theme.mixins.toolbar,
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
-    appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-    menuButton: {
-        marginLeft: 12,
-        marginRight: 36,
-    },
-    menuButtonHidden: {
-        display: 'none',
-    },
-    title: {
-        flexGrow: 1,
-    },
-    drawerPaper: {
-        position: 'relative',
-        whiteSpace: 'nowrap',
-        width: drawerWidth,
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-    drawerPaperClose: {
-        overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        width: theme.spacing.unit * 7,
-        [theme.breakpoints.up('sm')]: {
-            width: theme.spacing.unit * 9,
-        },
-    },
-    appBarSpacer: theme.mixins.toolbar,
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing.unit * 3,
-        height: '100vh',
-        overflow: 'auto',
-        marginTop: '2rem'
-    },
-    chartContainer: {
-        marginLeft: -22,
-    },
-    tableContainer: {
-        height: 320,
-    },
-    h5: {
-        marginBottom: theme.spacing.unit * 2,
-    },
-});
 
 class Layout extends React.Component {
     state = {
         open: true,
+        anchorEl: null,
+    };
+
+    handleClick = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleClose = () => {
+        this.setState({ anchorEl: null });
     };
 
     handleDrawerOpen = () => {
@@ -114,6 +49,7 @@ class Layout extends React.Component {
 
     render() {
         const { classes } = this.props;
+        const { anchorEl } = this.state;
 
         return (
             <div className={classes.root}>
@@ -134,20 +70,36 @@ class Layout extends React.Component {
                         >
                             <MenuIcon />
                         </IconButton>
-                        {/* <Typography
+                        <Typography
                             component="h1"
                             variant="h6"
                             color="inherit"
                             noWrap
                             className={classes.title}
                         >
-                            Layout
-            </Typography> */}
+
+                        </Typography>
+
                         <IconButton color="inherit">
                             <Badge badgeContent={4} color="secondary">
                                 <NotificationsIcon />
                             </Badge>
                         </IconButton>
+                        <Avatar onClick={this.handleClick} aria-label="Recipe" className={classes.avatar}>
+                            SQ
+                        </Avatar>
+
+
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={this.handleClose}
+                        >
+                            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                            <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                            <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                        </Menu>
                     </Toolbar>
                 </AppBar>
                 <Drawer
@@ -157,11 +109,18 @@ class Layout extends React.Component {
                     }}
                     open={this.state.open}
                 >
-                    <div className={classes.toolbarIcon}>
-                        <IconButton onClick={this.handleDrawerClose}>
-                            <ChevronLeftIcon />
-                        </IconButton>
+                    <div className={classes.headerClass}>
+                        <div style={{ marginLeft: '70px', marginTop: '15px' }}>
+                            <Typography variant="title"><em>Scrumify</em></Typography>
+                        </div>
+
+                        <div className={classes.toolbarIcon}>
+                            <IconButton onClick={this.handleDrawerClose}>
+                                <ChevronLeftIcon />
+                            </IconButton>
+                        </div>
                     </div>
+
                     <Divider />
                     <List>{mainListItems}</List>
                     <Divider />
