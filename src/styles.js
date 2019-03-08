@@ -3,6 +3,7 @@ const drawerWidth = 240
 export const styles = theme => ({
     root: {
         display: 'flex',
+        backgroundColor:'#FFFFFF'
     },
     fullWidth: {
         width: '100%'
