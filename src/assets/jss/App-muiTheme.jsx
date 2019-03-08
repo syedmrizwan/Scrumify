@@ -18,8 +18,8 @@ export default {
     },
     primary: {
       light: "#6E70C1",
-      main: "#9864FF",
-      dark: "#6650F9",
+      main: "#310055",
+      dark: "#5e00bb",
       contrastText: "#fff"
     }
   },
