@@ -4,10 +4,14 @@ import Avatar from '@material-ui/core/Avatar';
 import withStyles from '@material-ui/core/styles/withStyles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
-import { Typography, Grid } from '@material-ui/core';
+import { Typography, Grid, LinearProgress } from '@material-ui/core';
 import image from '../../images/bg2.jpg';
-
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import SignInForm from './SignInForm';
+import { login } from '../../actions/login';
+import SnackBar from '../../components/SnackBars/SnackBar';
+import { showErrorSnackBar } from '../../actions/snackbars';
 const styles = theme => ({
     main: {
 
@@ -41,35 +45,70 @@ const styles = theme => ({
     },
 });
 
-function SignIn(props) {
-    const { classes } = props;
+class SignIn extends React.Component {
 
-    return (
-        <div style={{ height: '636px', background: 'url(' + image + ') center center no-repeat', backgroundSize: 'cover' }}>
+    constructor(props) {
+        super(props)
 
-            <Grid style={{ justifyContent: 'center' }} container>
-                <Grid item sm={4}>
-                    <Paper className={classes.paper}>
-                        <Avatar className={classes.avatar}>
-                            <LockOutlinedIcon />
-                        </Avatar>
-                        <Typography component="h1" variant="h5">
-                            Sign In
-                        </Typography>
-                        <SignInForm />
-                    </Paper>
+        this.login = this.login.bind(this);
+    }
+
+    login(values) {
+        console.log(values)
+        this.props.dispatch(login(values))
+    }
+
+    render() {
+        const { classes } = this.props;
+
+        return (
+
+            <div style={{ height: '636px', background: 'url(' + image + ') center center no-repeat', backgroundSize: 'cover' }}>
+                {console.log(this.props)}
+                <Grid style={{ justifyContent: 'center' }} container>
+                    <Grid item sm={4}>
+                        <Paper className={classes.paper}>
+                            <Avatar className={classes.avatar}>
+                                <LockOutlinedIcon />
+                            </Avatar>
+                            <Typography component="h1" variant="h5">
+                                Sign In
+
+                            </Typography>
+
+                            <SignInForm onSubmit={this.login} />
+                        </Paper>
+                    </Grid>
                 </Grid>
-            </Grid>
 
 
 
-        </div>
+                {
+                    this.props.err_flag && <SnackBar
+                        close={setTimeout(() => { this.props.dispatch(showErrorSnackBar({ flag: false, message: '' })) }, 2500)}
+                        variant={"error"}
+                        Message={this.props.err_message}
+                        open={this.props.err_flag} />
+                }
 
-    );
+            </div>
+
+        );
+    }
+
 }
 
 SignIn.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignIn);
+
+function mapStateToProps(state) {
+    return {
+        err_flag: state.snackbars.err_flag,
+        err_message: state.snackbars.err_message
+        // isAuthenticated: store.auth.isAuthenticated,
+    };
+}
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(SignIn)));
