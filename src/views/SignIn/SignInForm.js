@@ -45,9 +45,9 @@ class SignInForm extends React.Component {
 
 
     render() {
-        const { classes } = this.props;
+        const { classes, handleSubmit } = this.props;
         return (
-            <form className={classes.form}>
+            <form onSubmit={handleSubmit} className={classes.form}>
                 <FormControl margin="normal" required fullWidth>
                     <InputLabel htmlFor="email">Email Address</InputLabel>
                     <Field

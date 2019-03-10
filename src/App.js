@@ -70,7 +70,7 @@ class App extends Component {
         <MuiThemeProvider theme={theme}>
           <Switch>
             <Route path="/" exact render={() => <Redirect to="/app" />} />
-            <PrivateRoute props={this.props} isAuthenticated={true} path="/app" component={Layout} />
+            <PrivateRoute props={this.props} isAuthenticated={this.props.isAuthenticated} path="/app" component={Layout} />
             <Route path="/login" exact component={SignIn} />
           </Switch>
         </MuiThemeProvider>
