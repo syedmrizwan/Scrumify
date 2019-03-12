@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import withStyles from '@material-ui/core/styles/withStyles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
-import { Typography, Grid, LinearProgress } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 import image from '../../images/bg2.jpg';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
