@@ -3,8 +3,6 @@ const moment = require('moment');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-
-
 const generateJwtToken = (user) => {
     let expires = moment().utc().add({ days: 1 }).unix();
     let token = jwt.sign({
@@ -16,13 +14,10 @@ const generateJwtToken = (user) => {
         expires: moment.unix(expires).format()
     }
 }
-let token;
 
 module.exports = {
-    async greetings() {
-        return { "message": "Sample Application For HAPI with JWT Auth & Postgres Database" }
-    },
     async authentiate(req, res) {
+        let token;
         let data = await userService.findUserByEmail(req, res);
         if (data.length > 0) {
             let user = data[0].dataValues;
@@ -36,8 +31,10 @@ module.exports = {
                 }
                 token = generateJwtToken(response);
             } else {
-                return { "error": "Invalid Credentials: Please check your email or password." };
+                return res.response({ "error": "Invalid Credentials: Please check your email or password." }).code(401);
             }
+        } else {
+            return res.response({ "error": "Invalid Credentials: Please check your email or password." }).code(401);
         }
         return token;
     }
