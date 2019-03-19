@@ -10,6 +10,7 @@ const generateJwtToken = (user) => {
         user: user
     }, "9DhvalMbCZ9srYWe9DTaJZ");
     return {
+        user: user,
         token: token,
         expires: moment.unix(expires).format()
     }
